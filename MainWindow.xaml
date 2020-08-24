@@ -1,0 +1,92 @@
+﻿<Window x:Class="rididct.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:rididct"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#ffbc00" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#ffbc00" />
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="Main">
+
+        <Grid x:Name="StartScreen" Visibility="Hidden">
+            <Rectangle Fill="#ffbc00" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="794"/>
+            <Label Content="Riddict" HorizontalAlignment="Left" Margin="29,56,0,0" VerticalAlignment="Top" FontSize="72" FontFamily="/rididct;component/Fonts/#Museo 900"/>
+            <Label Content="[rIdikt] [Noun]" HorizontalAlignment="Left" Margin="29,136,0,0" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 700"/>
+            <Label Content="A word game where you&#10;guess a word based off of&#10;the dictionary definition." HorizontalAlignment="Left" Margin="29,165,0,0" VerticalAlignment="Top" Width="276" Height="194" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="22"/>
+            <Border Margin="29,264,489,102">
+                <Grid x:Name="PlayButton" MouseLeftButtonDown="PlayButton_Click" Margin="-11,-11,-25,-17">
+                    <Rectangle x:Name="PlayButtonRect" Fill="Black" HorizontalAlignment="Left" Height="55" RadiusY="25" RadiusX="25" Stroke="Black" VerticalAlignment="Top" Width="276" Margin="16,8,0,0" MouseEnter="PlayButton_MouseEnter" MouseLeave="PlayButton_MouseLeave"/>
+                    <Label Content="Play" HorizontalAlignment="Left" Margin="125,17,0,0" VerticalAlignment="Top" Background="{x:Null}" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24" Foreground="White"/>
+
+                </Grid>
+
+            </Border>
+        </Grid>
+        <Grid x:Name="QuizScreen" MouseDown="BackgroundClick">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="247*"/>
+                <RowDefinition Height="174*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="AnswerBox_Text" Content="Answer                    " HorizontalAlignment="Left" Margin="178,2,0,0" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24" Background="{x:Null}" Foreground="#FFDADADA" Grid.Row="1" />
+            <Rectangle Fill="#ffbc00" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="67" Grid.RowSpan="2"/>
+            <Label Content="Riddict" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 900" FontSize="16"/>
+            <TextBox x:Name="AnswerBox" HorizontalAlignment="Left" Height="32" Margin="178,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24" BorderBrush="Black" SelectionBrush="#FFFFBC00" BorderThickness="0" LostFocus="AnswerBox_LostFocus" GotFocus="AnswerBox_GotFocus" Background="{x:Null}" Grid.Row="1" KeyUp="AnswerBox_KeyUp"/>
+            <Rectangle x:Name="AnswerBox_Line" Fill="Black" HorizontalAlignment="Left" Height="3" Margin="178,36,0,0" VerticalAlignment="Top" Width="522" Grid.Row="1"/>
+            <Label HorizontalAlignment="Left" Margin="401,93,0,0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="DefinitionBox" x:FieldModifier="public" HorizontalAlignment="Left" Margin="264,74,0,0" TextWrapping="Wrap" Text="Loading Word..." VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="18" Width="436" Height="170"/>
+            <Image x:Name="AboutButton" HorizontalAlignment="Left" Height="32" Margin="18,120,0,0" VerticalAlignment="Top" Width="32" Source="info.png" Grid.Row="1" MouseUp="AboutButton_Click"/>
+            <Button Margin="13,117,741,15" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Opacity="0" MouseDown="AboutButton_Click" />
+            <Image x:Name="EnterButton" HorizontalAlignment="Left" Height="29" Margin="671,7,0,0" VerticalAlignment="Top" Width="29" Source="enterBlack.png" Grid.Row="1" MouseDown="EnterClick" Cursor="Hand"/>
+            <Image x:Name="Live1" HorizontalAlignment="Left" Height="32" Margin="740,10,0,0" VerticalAlignment="Top" Width="32" Source="heart.png" RenderTransformOrigin="0.896,0.542"/>
+            <Image x:Name="Live2" HorizontalAlignment="Left" Height="32" Margin="703,10,0,0" VerticalAlignment="Top" Width="32" Source="heart.png"/>
+            <Image x:Name="Live3" HorizontalAlignment="Left" Height="32" Margin="666,10,0,0" VerticalAlignment="Top" Width="32" Source="heart.png"/>
+            <Image x:Name="EnterButton_Yellow" HorizontalAlignment="Left" Height="29" Margin="671,7,0,0" VerticalAlignment="Top" Width="29" Source="enterYellow.png" Grid.Row="1" MouseDown="EnterClick" Cursor="Hand" Visibility="Hidden"/>
+            <Label x:Name="Points" Content="Points: 0" HorizontalAlignment="Left" Margin="84,10,0,0" VerticalAlignment="Top" Height="32" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="20" Width="577"/>
+            <Label x:Name="FirstLetter" Content="?" HorizontalAlignment="Left" Margin="178,47,0,0" VerticalAlignment="Top" Height="113" Width="200" FontFamily="/rididct;component/Fonts/#Museo 900" FontSize="80"/>
+            <Grid x:Name="GameOverScreen" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="794" Grid.RowSpan="2" Background="#F7FFBC00" Visibility="Collapsed">
+                <Label Content="Game Over" HorizontalAlignment="Left" Margin="185,54,0,0" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 900" FontSize="72"/>
+                <Label Content="Points&#xD;&#xA;" HorizontalAlignment="Left" Margin="185,150,0,0" VerticalAlignment="Top" Width="405" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24" FontStretch="Condensed" Height="39"/>
+                <Label Content="Highest Combo" HorizontalAlignment="Left" Margin="185,189,0,0" VerticalAlignment="Top" Width="405" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24"/>
+                <Label Content="..........................................................................." HorizontalAlignment="Left" Margin="185,161,0,0" VerticalAlignment="Top" Width="405" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24"/>
+                <Label Content="..........................................................................." HorizontalAlignment="Left" Margin="185,200,0,0" VerticalAlignment="Top" Width="405" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24"/>
+                <Label x:Name="GameOverPoints" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="565,150,0,0" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24"/>
+                <Label x:Name="GameOverCombo" Content="0" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="565,189,0,0" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24"/>
+                <Grid x:Name="PlayAgainButton" Margin="257,0,256,56" VerticalAlignment="Bottom" HorizontalAlignment="Center" MouseLeftButtonDown="PlayAgainButton_Click" MouseEnter="PlayAgainButton_MouseEnter" MouseLeave="PlayAgainButton_MouseLeave">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="239*"/>
+                        <ColumnDefinition Width="18*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle x:Name="PlayAgainButtonRect" Fill="Black" HorizontalAlignment="Left" Height="55" RadiusY="25" RadiusX="25" Stroke="Black" VerticalAlignment="Top" Width="276" Margin="5,1,0,0" Grid.ColumnSpan="2"/>
+                    <Label Content="Play Again" HorizontalAlignment="Left" Margin="76,10,0,0" VerticalAlignment="Top" Background="{x:Null}" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24" Foreground="White"/>
+
+                </Grid>
+            </Grid>
+            <ProgressBar x:Name="ComboTimer_Bar" HorizontalAlignment="Left" Height="10" Margin="358,88,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Foreground="#FFFFBC00" Background="{x:Null}" Value="1"/>
+            <Label x:Name="ComboCounter_Text" Content="0x" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="16" Margin="458,78,0,0" Grid.Row="1"/>
+            <Grid x:Name="AboutScreen" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="794" Grid.RowSpan="2" Background="#F7FFBC00" Visibility="Hidden">
+                <Label Content="riddict" HorizontalAlignment="Left" Margin="253,67,0,0" VerticalAlignment="Top" FontFamily="/rididct;component/Fonts/#Museo 900" FontSize="72"/>
+                <Grid x:Name="CloseButton" Margin="240,0,273,52" VerticalAlignment="Bottom" HorizontalAlignment="Center" MouseLeftButtonDown="CloseButton_Click" MouseEnter="CloseButton_MouseEnter" MouseLeave="CloseButton_MouseLeave">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="239*"/>
+                        <ColumnDefinition Width="18*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle x:Name="CloseButtonRect" Fill="Black" HorizontalAlignment="Left" Height="55" RadiusY="25" RadiusX="25" Stroke="Black" VerticalAlignment="Top" Width="276" Margin="5,1,0,0" Grid.ColumnSpan="2"/>
+                    <Label Content="Close" HorizontalAlignment="Left" Margin="101,10,0,0" VerticalAlignment="Top" Background="{x:Null}" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="24" Foreground="White"/>
+                </Grid>
+                <TextBlock HorizontalAlignment="Left" Margin="231,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" Height="154" FontFamily="/rididct;component/Fonts/#Museo 500" FontSize="16"><Run Text="By Lewie Hill - 2020&#xA;To play type the word you think fits in with the definition.&#xA;To re gain lost lives, get a combo of 10 by guessing 10 correct words in a row."/></TextBlock>
+                <Image x:Name="Github" HorizontalAlignment="Left" Height="24" Margin="10,377,0,0" VerticalAlignment="Top" Width="24" Source="icons8-github-24.png" RenderTransformOrigin="0.5,3" MouseDown="GitHub_Click"/>
+            </Grid>
+        </Grid>
+        <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="923,280,-229,0" VerticalAlignment="Top" Width="100"/>
+    </Grid>
+
+</Window>
