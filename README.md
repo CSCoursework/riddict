@@ -1,5 +1,6 @@
 # riddict
 A word game where you have to guess a word based off of the dictionary definition.
+Just remember when playing, this game is really hard at first and because of the api, you have to use american spelling or the answer will be wrong, although maybe I will change that soon.
 
 ## Installation
 
