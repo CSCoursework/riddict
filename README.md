@@ -15,8 +15,8 @@ You can get combos and get lost lives back. A combo of 10 gives a life back,
 however, there is a time limit.
 
 ## License
-[GNU LGPLv3](https://choosealicense.com/licenses/lgpl-3.0/)
-Icons from [Icons8](https://icons8.com)
-Fonts from [Adobe Fonts](https://fonts.adobe.com/fonts/museo)
+[GNU LGPLv3](https://choosealicense.com/licenses/lgpl-3.0/) <br />
+Icons from [Icons8](https://icons8.com) <br />
+Fonts from [Adobe Fonts](https://fonts.adobe.com/fonts/museo) <br />
 
 By Lewie [Portfolio](https://lewie.myportfolio.com/)
